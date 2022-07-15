@@ -14,9 +14,9 @@ let filename=document.querySelector('.filename');
 let imagediv=document.querySelector('.img')
 document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
 const dropZoneElement = inputElement.closest(".drop-zone");
-const dropZoneButton = inputElement.closest(".drop-zone");
-const image=document.querySelector('.img');
-dropZoneElement.addEventListener("click", (e) => {
+const dropZoneButton = document.querySelector(".drop");
+const msg=document.querySelector('.team5-div1_1');
+dropZoneButton.addEventListener("click", (e) => {
     inputElement.click();
 });
 
@@ -59,12 +59,59 @@ if (!thumbnailElement) {
     thumbnailElement.classList.add("drop-zone__thumb");
     filename.appendChild(thumbnailElement);
     wrong.style.display='block';
+    document.getElementById("drop-display").disabled= true;
+    document.getElementById("submit").disabled = false;
+	document.getElementById("d1").style.color="rgba(0, 0, 0, 0.5)";
+	document.getElementById("d2").style.color="rgba(0, 0, 0, 0.5)";
+    document.getElementById('team5-div1_1').style.display='block';
+    document.getElementById('progressbar').style.display='block';
+    document.getElementById('img5').style.display='block';
+    document.getElementById('uploaded-after').style.display='block';
+    document.getElementById("file-size").style.display='block';
+    document.getElementById("file-size").innerHTML=formatBytes(file.size);
+    setTimeout((e)=>{
+        document.getElementById('progressbar').value='50';
+    },1000)
+    setTimeout((e)=>{
+        document.getElementById('progressbar').value='100';
+    },1000)
+
+    setTimeout((e)=>{
+        document.getElementById('team5-div1_1').innerHTML=file.name+' file added';
+    },1000)
+    setTimeout((e)=>{
+        document.getElementById('team5-div1_1').style.display='none';
+	document.getElementById('team5-div1_1').innerHTML='';
+    },3000)
 }
+
+
+
+function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
 thumbnailElement.dataset.label = file.name;
 
 wrong.addEventListener('click',(e)=>{
     thumbnailElement.classList.remove("drop-zone__thumb");
+    document.getElementById("drop-display").disabled = false;
+    document.getElementById("submit").disabled = true;
+    document.getElementById("d1").style.color="rgba(0, 0, 0, 1)";
+	document.getElementById("d2").style.color="rgba(0, 0, 0, 1)";
+    document.getElementById('img5').style.display='none';
+    document.getElementById('progressbar').style.display='none';
     wrong.style.display='none';
+    document.getElementById('uploaded-after').style.display='none';
+    document.getElementById("file-size").style.display='none';
 })
 // Show thumbnail for image files
 if (file.type.startsWith("image/")) {
@@ -77,4 +124,23 @@ if (file.type.startsWith("image/")) {
 } else {
     imagediv.style.backgroundImage = null;
 }
+}
+function validate(){
+	document.getElementById("error1").style.display="none"
+	document.getElementById("error").style.display="none"
+	if(document.getElementById("drop-display").files.length=="0"){
+		document.getElementById("error").style.display="block"
+		return false
+	}
+	else{
+		let size=document.getElementById("drop-display").files[0].size
+		size=size/1024
+		size=size/1024
+		if(size>5){
+			document.getElementById("error1").style.display="block"
+			return false
+	}
+	}
+	
+
 }

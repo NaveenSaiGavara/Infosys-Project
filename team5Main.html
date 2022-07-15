@@ -4,9 +4,10 @@
 	<link rel="stylesheet" type="text/css" href="team5Main.css">
 </head>
 <body>
+	<form action="team6.html" method="post" onsubmit="return validate()">
 	<div class="transparent5" style="display:none;"></div>
 	<div id="team5-div1"><center><img src="infyLogo.png" width="160px" height="75px"  style="margin-top: 10px;"></center>
-		<div id="team5-div1_1"><span style="font-size: 17px;position: absolute; right: 7px;top: 5px">&#9747;</span></div>
+		<div id="team5-div1_1" style="display:none" ><span style="font-size: 17px;position: absolute; right: 7px;top: 5px">&#9747;</span></div>
 	</div>
 	<div id="team5-div2" >
 		<div id="team5-div2_1" style="padding-top: 5px;">
@@ -20,6 +21,10 @@
 		<div id="feedback" onclick="feedback()">
 			<img src="feedback.png">
 		</div>
+		<div style="font-size:18px;margin-left: 110px;padding-left: 35px;background-color: 
+		#de350b;color: white;margin-bottom: -5px;width: 1125px;height: 30px;display: none;" id="error"><span style="font-size:22px;">&#9888;</span>Identity card required!</div>
+		<div style="font-size:18px;margin-left: 110px;padding-left: 35px;background-color: 
+		#de350b;color: white;margin-bottom: -5px;width: 1125px;height: 30px;display: none;" id="error1"><span style="font-size:22px;">&#9888;</span>File size should be less than 5MB!</div>
 		<div id="team5-div2_2">
 			<p style="margin-top: 6px;padding-top: 10px;font-weight: bold;text-indent: 15px;font-size: 15px;">1.&nbsp;&nbsp;&nbsp;Please upload your college photo identity card or government photo identity proof in PDF for verification</p>
 			<p style="text-indent: 40px;font-size: 13.3px;margin-top: -3px;">Please do not upload Aadhar card as your photo identity proof</p>
@@ -28,18 +33,24 @@
 
 			<div class="main">
 	            <div class="drop-zone">
-	                <span class="drop-zone__prompt">Drop and Drop <br>or <br> <span class="drop">Browse</span></span>
-	                <input type="file" name="myFile" class="drop-zone__input" accept="APPLICATION/pdf,APPLICATION"> 
-	              </div>
+	                <span class="drop-zone__prompt" id="d1">Drop and Drop <br>or <br> <span class="drop" id="d2">Browse</span></span>
+	                <input type="file" name="myFile" class="drop-zone__input" id="drop-display" accept="APPLICATION/pdf,APPLICATION"> 
+	             </div>
 	              <div id="uploaded-files"><b>uploaded files:</b></div>
 	              <div class="files-area">
-	                <div class="img"><img src="pdflogo.png" style= "height: 30px; width: 22px;"></div>
-	                <div class="filename"><span id="x">&times;</span></div>
+	                <div class="img" id="img5" style="display: none;"><img src="pdflogo.png" style= "height: 30px; width: 22px;">
+	                </div>
+	                <div class="filename">
+	                	<label id="file-size" style="top: 8px;font-size: 14px;position: absolute;z-index: 3;right: 30px;opacity: 0.5;"></label>
+						<span id="x">&times;</span>
+						<progress value="10" max="100" id="progressbar" style="display: none;"></progress>
+						<p id="uploaded-after" style="position: absolute; top: 28px;display: none;z-index: 3;font-size: 14px">uploaded!</p>
+					</div>
 	              </div>
         	</div>
 
 		</div>
-		<input type="submit" id="submit-previous" name="" value="PREVIOUS PAGE">
+		<input type="button" id="submit-previous" name="" value="PREVIOUS PAGE">
 		<input type="submit" id="submit-next" name="" value="NEXT PAGE">
 		<div style="display: none;" id="feedback1">
 			<img src="infofeed.png" style="margin-left: -1px;margin-top: 13px; margin-bottom: 20px;">
@@ -59,6 +70,7 @@
 			<input type="submit" id="submit" name="" value="NEXT PAGE">
 		</div>
 	</footer>
+</form>
 
 <script type="text/javascript" src="team5Main.js" ></script>
 </body>
